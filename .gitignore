@@ -1,0 +1,24 @@
+# Python / virtual env
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+.venv/
+
+# Secrets & local files
+.env
+.streamlit/secrets.toml
+
+# FAISS index (large binary – rebuild on cloud or commit only if small)
+faiss_index/
+
+# Data (if PDFs are big)
+data/*.pdf
+data/*.txt
+
+# Misc
+.DS_Store
+Thumbs.db
