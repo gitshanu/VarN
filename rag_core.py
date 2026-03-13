@@ -1,4 +1,4 @@
-# rag_core.py
+
 from langchain_community.document_loaders import DirectoryLoader, PyPDFDirectoryLoader, TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -66,7 +66,7 @@ class VectorStore:
             documents=chunks,
             embedding=self.embeddings
         )
-        self.vectorstore.save_local(self.persist_dir)          # <--- added
+        self.vectorstore.save_local(self.persist_dir)         
         print(f"FAISS index saved to {self.persist_dir}")
         return self.vectorstore
 
@@ -74,7 +74,7 @@ class VectorStore:
         self.vectorstore = FAISS.load_local(
             self.persist_dir,
             embeddings=self.embeddings,
-            allow_dangerous_deserialization=True   # needed in newer versions
+            allow_dangerous_deserialization=True   
         )
         print(f"Loaded FAISS index with {self.vectorstore.index.ntotal} vectors")
         return self.vectorstore
@@ -94,7 +94,7 @@ class RAGChatbot:
         if not api_key:
             raise ValueError("GROQ_API_KEY not found in environment variables or secrets")
         self.llm = ChatGroq(
-            model_name="llama-3.1-8b-instant",   # fast & cheap on Groq
+            model_name="llama-3.1-8b-instant",   
             temperature=0.1,
             max_tokens=1024
         )
@@ -154,8 +154,8 @@ Answer:"""
 
 
 
-# ====================== RUN THE CHATBOT ======================
+
 if __name__ == "__main__":
-    chatbot = RAGChatbot(data_dir="../data")   # change path if needed
-    chatbot.build_index(force_rebuild=False)   # set True only first time or when data changes
+    chatbot = RAGChatbot(data_dir="../data")   
+    chatbot.build_index(force_rebuild=False)  
     chatbot.chat()
